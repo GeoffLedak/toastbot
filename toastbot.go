@@ -25,13 +25,20 @@ func main() {
 	err := decoder.Decode(&configuration)
 	if err != nil {
 		fmt.Println("error", err)
+	} else {
+		fmt.Println("Reading config file...")
+		fmt.Println("Username: " + configuration.Username)
+		fmt.Println("Password: *******")
+		fmt.Println("Channel: " + configuration.Channel)
 	}
-	fmt.Println(configuration.Username)
 
 	// connect to the twitch server
 	conn, err := net.Dial("tcp", "irc.chat.twitch.tv:6667")
 	if err != nil {
 		panic(err)
+	} else {
+		fmt.Println("Connecting to server: irc.chat.twitch.tv:6667")
+		fmt.Println("-Sucess!")
 	}
 
 	// token, username, channel
@@ -48,6 +55,8 @@ func main() {
 		msg, err := tp.ReadLine()
 		if err != nil {
 			panic(err)
+		} else {
+			fmt.Println(msg)
 		}
 
 		// split the msg by spaces
